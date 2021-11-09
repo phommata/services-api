@@ -42,6 +42,44 @@ Removes all our container(service)
 ## Example HTTP request:
 
     GET localhost:8080/services?limit=1&offset=0&search=us
+    
+    {
+       "data":[
+          {
+             "id":7,
+             "name":"FX Rates International...",
+             "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+             "versions":[
+                {
+                   "id":19,
+                   "name":"1.0.0",
+                   "service_id":"7",
+                   "created_at":"2021-11-09T03:55:51Z",
+                   "updated_at":"2021-11-09T03:55:51Z"
+                },
+                {
+                   "id":20,
+                   "name":"1.0.1",
+                   "service_id":"7",
+                   "created_at":"2021-11-09T03:55:51Z",
+                   "updated_at":"2021-11-09T03:55:51Z"
+                },
+                {
+                   "id":21,
+                   "name":"1.0.2",
+                   "service_id":"7",
+                   "created_at":"2021-11-09T03:55:51Z",
+                   "updated_at":"2021-11-09T03:55:51Z"
+                }
+             ],
+             "version_count":3,
+             "created_at":"2021-11-09T03:55:51Z"
+          }
+       ],
+       "limit":1,
+       "offset":1,
+       "total":5
+    }
 
 ## Design considerations
 1. Extensibility
