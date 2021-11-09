@@ -62,7 +62,7 @@ func (repository *ServiceRepo)  FindServices(c *gin.Context) {
 		repository.Db.Table("services").Select("count(*)").Count(&count)
 	}
 
-	repository.Db.Debug().Limit(limit).Offset(offset).Preload("Versions").Table("services s").
+	repository.Db.Limit(limit).Offset(offset).Preload("Versions").Table("services s").
 	Select("*").
 	Joins("left join " +
 		"(" +
