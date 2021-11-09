@@ -1,4 +1,4 @@
-#The Assignment
+# The Assignment
 You're responsible for the data model and API portions of this story. 
 Implement a Services API that can be used to implement this dashboard widget. It should support
 - Returning a list of services
@@ -22,7 +22,7 @@ during this exercise.
 You have a week to complete this, but we don't expect you to spend more than a few hours on it. When it's ready, 
 please email your recruiter a link to the source code, preferably in a github repo.
 
-##Getting started 
+## Getting started 
 Build our custom image(i.e dockerfile provided on build key)
 
     docker-compose build 
@@ -35,14 +35,15 @@ Removes all our container(service)
 
     docker-compose down
 
-##Quick start
-docker-compose down; docker-compose build; docker-compose up
+## Quick start
 
-    GET localhost:8080/services?limit=12&offset=0&search=us
+    docker-compose down; docker-compose build; docker-compose up
 
-    
+## Example HTTP request:
 
-##Design considerations
+    GET localhost:8080/services?limit=1&offset=0&search=us
+
+## Design considerations
 1. Extensibility
 2. Modularity
 3. Maintainability
@@ -50,7 +51,7 @@ docker-compose down; docker-compose build; docker-compose up
 5. Robustness
 6. Scalability
 
-##Assumptions
+## Assumptions
 1. Service has id, name, description, version, version_count, created_at
 2. Version has id, name, created_at
 3. API can sort, filter, paginate, and list versions
@@ -59,7 +60,7 @@ docker-compose down; docker-compose build; docker-compose up
 6. Response with pagination will contain offset and limit
 7. Services will be sorted by created_at
 
-##Trade-offs
+## Trade-offs
 1. Go is fast and scalable
 2. MySQL is good for structured, normalized data
 3. Docker containerizes application to easily build, test, and deploy. 
