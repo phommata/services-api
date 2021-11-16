@@ -1,26 +1,15 @@
-# The Assignment
-You're responsible for the data model and API portions of this story. 
-Implement a Services API that can be used to implement this dashboard widget. It should support
+Services API
+Includes the data model and API. 
+A Services API that can be used to implement this dashboard widget. It supports
 - Returning a list of services
 - support filtering, sorting, pagination
 - Fetching a particular service
 - including a method for retrieving its versions
 
-The API can be read-only.
-
-Choose a persistence mechanism that is appropriate for this feature.
-
 Additional considerations
-If you have the time and inclination, consider the following:
 - Include tests (unit, integration) or a test plan
 - Provide authentication/authorization on the API
 - Add CRUD operations to the API
-
-How to submit the project
-Include a README with your project that describes your design considerations, assumptions and trade-offs made 
-during this exercise.
-You have a week to complete this, but we don't expect you to spend more than a few hours on it. When it's ready, 
-please email your recruiter a link to the source code, preferably in a github repo.
 
 ## Getting started 
 Build our custom image(i.e dockerfile provided on build key)
