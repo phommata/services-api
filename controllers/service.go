@@ -11,7 +11,7 @@ import (
 	"net/http"
 )
 
-const error = "error"
+const Error = "error"
 
 type ServiceRepo struct {
 	Db *gorm.DB
