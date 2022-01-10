@@ -24,7 +24,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: root
       MYSQL_PASSWORD: root
-      MYSQL_DATABASE: services-api
+      MYSQL_DATABASE: services_api
     container_name: services-api-db
     ports:
       - 33066:3306

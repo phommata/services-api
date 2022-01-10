@@ -4,10 +4,10 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 	"github.com/phommata/services-api/config"
-	"github.com/phommata/services-api/responses"
 	"github.com/phommata/services-api/models"
+	"github.com/phommata/services-api/requests"
+	"github.com/phommata/services-api/responses"
 	"log"
-	"strconv"
 	"net/http"
 )
 
@@ -26,43 +26,31 @@ func New(conf *config.Conf) *ServiceRepo {
 // GET /services
 // Get all services
 func (repository *ServiceRepo)  FindServices(c *gin.Context) {
+	var service  requests.Service
 	var services []responses.Service
 	var count int64
 	var searchWhere string
 
-	limitStr := c.DefaultQuery("limit", "12")
-	limit, err := strconv.Atoi(limitStr)
-	if err != nil {
-		errMsg := "limit is not an int"
+	if err := c.Bind(&service); err != nil {
+		errMsg := "cannot bind service"
 		log.Println(errMsg, err)
 
 		c.JSON(http.StatusBadRequest,
-			gin.H{error: errMsg},
+			gin.H{Error: err.Error()},
 		)
 		return
 	}
-	offsetStr := c.DefaultQuery("offset", "0")
-	offset, err := strconv.Atoi(offsetStr)
-	if err != nil {
-		errMsg := "offset is not an int"
-		log.Println(errMsg, err)
-		c.JSON(http.StatusBadRequest,
-			gin.H{error: errMsg},
-		)
-		return
-	}
-	search := c.Query("search")
 
-	if search != "" {
-		searchWhere = "s.name LIKE '%" + search + "%' OR s.description LIKE '%" + search + "%'"
+	if service.Search != "" {
+		searchWhere = "s.name LIKE '%" + service.Search + "%' OR s.description LIKE '%" + service.Search + "%'"
 		repository.Db.Table("services s").
-		Select("count(*) count").Where("s.name LIKE '%" + search + "%' OR s.description LIKE '%" + search + "%'").
+		Select("count(*) count").Where("s.name LIKE '%" + service.Search + "%' OR s.description LIKE '%" + service.Search + "%'").
 		Count(&count)
 	} else {
 		repository.Db.Table("services").Select("count(*)").Count(&count)
 	}
 
-	repository.Db.Limit(limit).Offset(offset).Preload("Versions").Table("services s").
+	repository.Db.Limit(service.Limit).Offset(service.Offset).Preload("Versions").Table("services s").
 	Select("*").
 	Joins("left join " +
 		"(" +
@@ -77,8 +65,8 @@ func (repository *ServiceRepo)  FindServices(c *gin.Context) {
 	c.JSON(http.StatusOK,
 		gin.H{
 			"data": services,
-			"limit": limit,
-			"offset": offset,
+			"limit": service.Limit,
+			"offset": service.Offset,
 			"total": count,
 		},
 	)
